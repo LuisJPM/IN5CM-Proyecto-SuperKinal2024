@@ -1,55 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.luisperez.model;
-
 /**
- *
- * @author LUIIIS
- */
+* FXML Controller class
+*
+* @author LUISSS
+*/
 public class Encargado {
-    private int cargoId;
-    private String nombreCargo;
-    private String descripcionCargo;
-
+    private int encargadoId;
+    
     public Encargado() {
     }
 
+    public Encargado(int encargadoId) {
+        this.encargadoId = encargadoId;
+    }
+
     public Encargado(int cargoId, String nombreCargo, String descripcionCargo) {
-        this.cargoId = cargoId;
-        this.nombreCargo = nombreCargo;
-        this.descripcionCargo = descripcionCargo;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public int getCargoId() {
-        return cargoId;
+    public int getEncargadoId() {
+        return encargadoId;
     }
 
-    public void setCargoId(int cargoId) {
-        this.cargoId = cargoId;
-    }
-
-    public String getNombreCargo() {
-        return nombreCargo;
-    }
-
-    public void setNombreCargo(String nombreCargo) {
-        this.nombreCargo = nombreCargo;
-    }
-
-    public String getDescripcionCargo() {
-        return descripcionCargo;
-    }
-
-    public void setDescripcionCargo(String descripcionCargo) {
-        this.descripcionCargo = descripcionCargo;
+    public void setEncargadoId(int encargadoId) {
+        this.encargadoId = encargadoId;
     }
 
     @Override
     public String toString() {
-        return "Encargado{" + "cargoId=" + cargoId + ", nombreCargo=" + nombreCargo + ", descripcionCargo=" + descripcionCargo + '}';
+        return "Id: " + encargadoId;
     }
+
+    public int getCargoId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 }

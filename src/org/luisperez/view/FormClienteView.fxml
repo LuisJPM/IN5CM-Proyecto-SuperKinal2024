@@ -8,40 +8,31 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.luisperez.controller.FormClienteController">
    <children>
-      <ImageView fitHeight="748.0" fitWidth="504.0" layoutX="-2.0" layoutY="1.0">
+      <ImageView fitHeight="750.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../image/FormClienteView.png" />
+            <Image url="@../image/Fondo%20FormularioClientes.png" />
          </image>
       </ImageView>
-      <TextField fx:id="tfClienteId" editable="false" layoutX="42.0" layoutY="224.0" prefHeight="30.0" prefWidth="300.0" />
-      <TextField fx:id="tfNombre" layoutX="42.0" layoutY="301.0" prefHeight="30.0" prefWidth="300.0" />
-      <TextField fx:id="tfApellido" layoutX="42.0" layoutY="375.0" prefHeight="30.0" prefWidth="300.0" />
-      <TextField fx:id="tfTelefono" layoutX="42.0" layoutY="463.0" prefHeight="30.0" prefWidth="300.0" />
-      <TextField fx:id="tfDireccion" layoutX="42.0" layoutY="528.0" prefHeight="30.0" prefWidth="300.0" />
-      <TextField fx:id="tfNit" layoutX="42.0" layoutY="606.0" prefHeight="30.0" prefWidth="300.0" />
-      <GridPane layoutX="51.0" layoutY="658.0" prefHeight="85.0" prefWidth="244.0">
+      <TextField fx:id="tfClienteId" editable="false" layoutX="36.0" layoutY="149.0" prefHeight="25.0" prefWidth="278.0" promptText="clienteId" />
+      <TextField fx:id="tfNombre" layoutX="36.0" layoutY="220.0" prefHeight="25.0" prefWidth="278.0" promptText="Ingrese su nombre" />
+      <TextField fx:id="tfApellido" layoutX="36.0" layoutY="289.0" prefHeight="25.0" prefWidth="278.0" promptText="Ingrese su apellido" />
+      <TextField fx:id="tfTelefono" layoutX="36.0" layoutY="363.0" prefHeight="25.0" prefWidth="278.0" promptText="Ingrese su telefono" />
+      <TextField fx:id="tfNit" layoutX="36.0" layoutY="435.0" prefHeight="25.0" prefWidth="278.0" promptText="Nit o CF" />
+      <TextField fx:id="tfDireccion" layoutX="36.0" layoutY="509.0" prefHeight="25.0" prefWidth="278.0" promptText="Ingrese su Dirección" />
+      <GridPane layoutX="36.0" layoutY="597.0" prefHeight="89.0" prefWidth="278.0">
         <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="122.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="122.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="65.0" prefWidth="99.0" text="Guardar">
-               <font>
-                  <Font name="Verdana" size="16.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="65.0" prefWidth="99.0" text="Cancelar" GridPane.columnIndex="1">
-               <font>
-                  <Font name="Verdana" size="16.0" />
-               </font>
-            </Button>
+            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="85.0" text="Guardar" GridPane.halignment="CENTER" />
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="85.0" text="Cancelar" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
          </children>
       </GridPane>
    </children>

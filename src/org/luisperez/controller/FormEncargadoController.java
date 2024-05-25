@@ -18,6 +18,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.luisperez.dao.Conexion;
 import org.luisperez.dto.CargoDTO;
+import org.luisperez.model.Cargo;
 import org.luisperez.model.Encargado;
 import org.luisperez.system.Main;
 
@@ -60,18 +61,18 @@ public class FormEncargadoController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-       if(CargoDTO.getCargoDTO().getCargo() != null){
-           cargarDatos(CargoDTO.getCargoDTO().getCargo());  
-       }
-    }  
-    
-    public void cargarDatos(Encargado cargo){
-        tfCargoId.setText(Integer.toString(cargo.getCargoId()));
-        tfNombre.setText(cargo.getNombreCargo());
-        taDescripcion.setText(cargo.getDescripcionCargo());
-    }    
+@Override
+public void initialize(URL location, ResourceBundle resources) {
+    if(CargoDTO.getCargoDTO().getCargo() != null){
+        cargarDatos(CargoDTO.getCargoDTO().getCargo());  
+    }
+}  
+
+public void cargarDatos(Cargo cargo){
+    tfCargoId.setText(Integer.toString(cargo.getCargoId()));
+    tfNombre.setText(cargo.getNombreCargo());
+    taDescripcion.setText(cargo.getDescripcionCargo());
+}  
     
     public void agregarCargo(){
         try{

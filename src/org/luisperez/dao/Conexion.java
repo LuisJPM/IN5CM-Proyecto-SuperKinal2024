@@ -15,7 +15,7 @@ import java.sql.SQLException;
 */
 public class Conexion {
     private static Conexion instance;
-    private String jdbcurl = "jdbc:mysql://localhost:3306/lperezzzzparte2.sql?serverTimezone=GMT-6&useSSL=false";
+    private String jdbcurl = "jdbc:mysql://localhost:3306/DBF.sql?serverTimezone=GMT-6&useSSL=false";
     private String user = "luisPerez";
     private String password = "Luis12***";
     private Conexion(){

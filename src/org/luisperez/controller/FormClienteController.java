@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and LUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIS open the template in the editor.
- */
 package org.luisperez.controller;
 
 import java.net.URL;
@@ -21,7 +16,6 @@ import org.luisperez.dto.ClienteDTO;
 import org.luisperez.model.Cliente;
 import org.luisperez.system.Main;
 import org.luisperez.utils.SuperKinalAlert;
- 
 /**
 * FXML Controller class
 *
@@ -29,151 +23,101 @@ import org.luisperez.utils.SuperKinalAlert;
 */
 public class FormClienteController implements Initializable {
     private Main stage;
-    private int op;
     
-    private static Connection conexion = null;
-    private static PreparedStatement statement = null;
+    private int operation;
     
     @FXML
-    TextField tfClienteId, tfNombre, tfApellido, tfTelefono, tfDireccion, tfNit;
-    @FXML
-    Button btnGuardar, btnCancelar;
+    private TextField tfClienteId, tfNombre, tfApellido, tfTelefono, tfNit, tfDireccion;
     
     @FXML
-    public void handleButtonAction(ActionEvent event){
-        if(event.getSource() == btnCancelar){
+    private Button btnGuardar, btnCancelar;
+    
+    @FXML
+    public void handleButtonAction(ActionEvent event) {
+        if (event.getSource() == btnCancelar) {
+            cancelAction();
+        } else if (event.getSource() == btnGuardar) {
+            saveAction();
+        }
+    }
+
+    private void cancelAction() {
+        stage.menuClienteView();
+        ClienteDTO.getClienteDTO().setCliente(null);
+    }
+
+    private void saveAction() {
+        if (tfNombre.getText().isEmpty() || tfApellido.getText().isEmpty() || tfDireccion.getText().isEmpty()) {
+            SuperKinalAlert.getInstance().mostrarAlertaInformacion(600);
+            tfNombre.requestFocus();
+        } else if (operation == 1) {
+            agregarCliente();
+            SuperKinalAlert.getInstance().mostrarAlertaInformacion(400);
             stage.menuClienteView();
-            ClienteDTO.getClienteDTO().setCliente(null);
-        }else if(event.getSource() == btnGuardar){
-            if(op == 1){
-                if(!tfNombre.getText().equals("") && !tfApellido.getText().equals("") && !tfDireccion.getText().equals("")){
-                    agregarCliente();
-                    SuperKinalAlert.getInstance().mostrarAlertaInformacion(400);
-                    stage.menuClienteView();
-                }else{
-                    SuperKinalAlert.getInstance().mostrarAlertaInformacion(600);
-                    tfNombre.requestFocus();
-                }
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-            }else if(op == 2){
-                if(!tfNombre.getText().equals("") && !tfApellido.getText().equals("") && !tfDireccion.getText().equals("")){
-                    if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(505).get() == ButtonType.OK){
-                        editarCliente();
-                        ClienteDTO.getClienteDTO().setCliente(null);
-                        SuperKinalAlert.getInstance().mostrarAlertaInformacion(500);
-                        stage.menuClienteView();
-                    }else{
-                        stage.menuClienteView();
-                    }
-                }else{
-                    SuperKinalAlert.getInstance().mostrarAlertaInformacion(600);
-                    tfNombre.requestFocus();
-                }  
+        } else if (operation == 2) {
+            if (SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(505).get() == ButtonType.OK) {
+                editarCliente();
+                ClienteDTO.getClienteDTO().setCliente(null);
+                SuperKinalAlert.getInstance().mostrarAlertaInformacion(500);
+                stage.menuClienteView();
+            } else {
+                stage.menuClienteView();
             }
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(ClienteDTO.getClienteDTO().getCliente() != null){
+        if (ClienteDTO.getClienteDTO().getCliente() != null) {
             cargarDatos(ClienteDTO.getClienteDTO().getCliente());
         }
     }    
     
-    public void cargarDatos(Cliente cliente){
-        tfClienteId.setText(Integer.toString(cliente.getClienteId()));
+    public void cargarDatos(Cliente cliente) {
+        tfClienteId.setText(String.valueOf(cliente.getClienteId()));
         tfNombre.setText(cliente.getNombre());
         tfApellido.setText(cliente.getApellido());
         tfTelefono.setText(cliente.getTelefono());
-        tfDireccion.setText(cliente.getDireccion());
         tfNit.setText(cliente.getNit());
+        tfDireccion.setText(cliente.getDireccion());
     }
-
-    public void agregarCliente(){
-        try{
-            conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_agregarCliente(?, ?, ?, ?, ?)";
-            statement = conexion.prepareStatement(sql);
+    
+    public void agregarCliente() {
+        String sql = "call sp_agregarCliente(?, ?, ?, ?, ?)";
+        try (Connection conexion = Conexion.getInstance().obtenerConexion();
+             PreparedStatement statement = conexion.prepareStatement(sql)) {
             statement.setString(1, tfNombre.getText());
             statement.setString(2, tfApellido.getText());
-            statement.setString(3, tfTelefono.getText()); 
-            statement.setString(4, tfDireccion.getText());
-            statement.setString(5, tfNit.getText());
+            statement.setString(3, tfTelefono.getText());
+            statement.setString(4, tfNit.getText());
+            statement.setString(5, tfDireccion.getText());
             statement.execute();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }finally{
-            try{
-                if(statement != null){
-                    statement.close();
-                }
-                if(conexion != null){
-                    conexion.close();
-                }
-            }catch(SQLException e){
-                System.out.println(e.getMessage());
-            }
         }
     }
     
-    public void editarCliente(){
-        try{
-            conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_editarCliente(?,?,?,?,?,?)";
-            statement = conexion.prepareStatement(sql);
+    public void editarCliente() {
+        String sql = "call sp_editarCliente(?, ?, ?, ?, ?, ?)";
+        try (Connection conexion = Conexion.getInstance().obtenerConexion();
+             PreparedStatement statement = conexion.prepareCall(sql)) {
             statement.setInt(1, Integer.parseInt(tfClienteId.getText()));
             statement.setString(2, tfNombre.getText());
             statement.setString(3, tfApellido.getText());
             statement.setString(4, tfTelefono.getText());
-            statement.setString(5, tfDireccion.getText());
-            statement.setString(6, tfNit.getText());
+            statement.setString(5, tfNit.getText());
+            statement.setString(6, tfDireccion.getText());
             statement.execute();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }finally{
-            try{
-                if(statement != null){
-                    statement.close();
-                }
-                if(conexion != null){
-                    conexion.close();
-                }
-            }catch(SQLException e){
-                System.out.println(e.getMessage());
-            }
         }
-    }
-            
-    public Main getStage() {
-        return stage;
     }
 
     public void setStage(Main stage) {
         this.stage = stage;
     }
 
-    public void setOp(int op) {
-        this.op = op;
+    public void setOp(int operation) {
+        this.operation = operation;
     }
 }

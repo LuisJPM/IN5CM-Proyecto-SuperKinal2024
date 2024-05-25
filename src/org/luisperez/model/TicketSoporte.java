@@ -1,31 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.luisperez.model;
-
 /**
- *
- * @author informatica
- */
+* FXML Controller class
+*
+* @author LUISSS
+*/
 public class TicketSoporte {
     private int ticketSoporteId;
     private String descripcion;
     private String estatus;
+    
+    //Llaves foráneas con Join :)))))
     private int clienteId;
     private String cliente;
+    
+    //Si no se usa de ninguna manera (Objeto o Join), solamente se deja como un Id
     private int facturaId;
+    private String factura;
     
     public TicketSoporte(){
+    
     }
 
-    public TicketSoporte(int ticketSoporteId, String descripcion, String estatus, String cliente, int facturaId) {
+    public TicketSoporte(int ticketSoporteId, String descripcion, String estatus, String cliente, String factura) {
         this.ticketSoporteId = ticketSoporteId;
         this.descripcion = descripcion;
         this.estatus = estatus;
         this.cliente = cliente;
-        this.facturaId = facturaId;
+        this.factura = factura;
     }
 
     public int getTicketSoporteId() {
@@ -76,8 +77,18 @@ public class TicketSoporte {
         this.facturaId = facturaId;
     }
 
+    public String getFactura() {
+        return factura;
+    }
+
+    public void setFactura(String factura) {
+        this.factura = factura;
+    }
+
     @Override
     public String toString() {
         return "TicketSoporte{" + "ticketSoporteId=" + ticketSoporteId + ", descripcion=" + descripcion + ", estatus=" + estatus + ", clienteId=" + clienteId + ", cliente=" + cliente + ", facturaId=" + facturaId + '}';
     }
+    
+    
 }

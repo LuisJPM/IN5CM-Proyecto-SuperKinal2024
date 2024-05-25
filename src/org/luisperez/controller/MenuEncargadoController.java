@@ -49,28 +49,7 @@ public class MenuEncargadoController implements Initializable {
     @FXML
     TextField tfEncargadoId;
                     
-    @FXML
-    public void handleButtonAction(ActionEvent event){
-        if(event.getSource() == btnRegresar){
-            stage.menuPrincipalView();
-        }else if(event.getSource() == btnAgregar){
-            stage.formCargoView(1);
-        }else if(event.getSource() == btnEditar){
-            CargoDTO.getCargoDTO().setCargo((Encargado)tblEncargados.getSelectionModel().getSelectedItem());
-            stage.formCargoView(2);
-        }else if(event.getSource() == btnEliminar){
-           eliminarCargo(((Encargado)tblEncargados.getSelectionModel().getSelectedItem()).getCargoId()); 
-           cargarDatos();
-        }else if(event.getSource() == btnBuscar){
-            tblEncargados.getItems().clear();
-            if(tfEncargadoId.getText().equals("")){
-                cargarDatos();
-            }
-            op = 3;
-            cargarDatos();
-        }
-    }
-    
+
     /**
      * Initializes the controller class.
      */
