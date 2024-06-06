@@ -114,4 +114,5 @@ public class FormCategoriaProductoController implements Initializable {
     public void setOperation(int operation) {
         this.operation = operation;
     }
+
 }

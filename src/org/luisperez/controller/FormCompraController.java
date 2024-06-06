@@ -114,4 +114,8 @@ public class FormCompraController implements Initializable {
     public void setOperation(int operation) {
         this.operation = operation;
     }
+
+    public void setOp(int op) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
